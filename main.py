@@ -13,15 +13,16 @@ Deterministic, standard library only. No network, no randomness.
 
 import os
 
-ENTRY = "kiowayyy"
+# The account's own make.fun username, sent as one word.
+USERNAME = "kiowayyy"
 MAX_CHARS = 30
 
 
 def main():
-    if len(ENTRY) > MAX_CHARS:
+    if len(USERNAME) > MAX_CHARS:
         raise ValueError(
             "entry %r is %d characters, over the %d-character limit"
-            % (ENTRY, len(ENTRY), MAX_CHARS)
+            % (USERNAME, len(USERNAME), MAX_CHARS)
         )
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output/entry.txt")
     # MAKEFUN_OUTPUT_DIR points at the output directory; accept either a
@@ -32,8 +33,8 @@ def main():
         path = os.path.join(out_dir, "entry.txt")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as fh:
-        fh.write(ENTRY)
-    print("wrote %s (%d characters)" % (path, len(ENTRY)))
+        fh.write(USERNAME)
+    print("wrote %s (%d characters)" % (path, len(USERNAME)))
 
 
 if __name__ == "__main__":
